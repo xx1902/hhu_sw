@@ -10,5 +10,7 @@ public class Main {
         System.out.println("Hello world!");
         //第一次 修改代码测试
         System.out.println("qxk");
+        //第二次修改，
+        System.out.println("lxd-test");
     }
 }
