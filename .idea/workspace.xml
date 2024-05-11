@@ -4,13 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="27cfa1d9-6876-4943-bd14-9ff61f8a2d84" name="Changes" comment="" />
+    <list default="true" id="27cfa1d9-6876-4943-bd14-9ff61f8a2d84" name="Changes" comment="lxd的test">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="lxd" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -60,6 +67,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -72,8 +80,25 @@
       <option name="presentableId" value="Default" />
       <updated>1715405958936</updated>
       <workItem from="1715405960133" duration="336000" />
-      <workItem from="1715406321046" duration="106000" />
+      <workItem from="1715406321046" duration="334000" />
     </task>
+    <task id="LOCAL-00001" summary="lxd的test">
+      <option name="closed" value="true" />
+      <created>1715406477013</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1715406477013</updated>
+    </task>
+    <task id="LOCAL-00002" summary="lxd的test">
+      <option name="closed" value="true" />
+      <created>1715406607448</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1715406607448</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -90,7 +115,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/lxd" />
+                        <option value="lxd" />
                       </list>
                     </value>
                   </entry>
@@ -101,5 +126,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="lxd的test" />
+    <option name="LAST_COMMIT_MESSAGE" value="lxd的test" />
   </component>
 </project>
