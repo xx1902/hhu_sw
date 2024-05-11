@@ -1,6 +1,4 @@
 package com.lxd;
-
-
 /**
  *
  * @author Marchino
