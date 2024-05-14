@@ -1,3 +1,9 @@
+/.idea/
+*.iml
+/targer
+/out
+
+==============java ignore========
 # Compiled class file
 *.class
 
