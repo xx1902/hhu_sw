@@ -15,7 +15,7 @@ public class DataReader {
      * @author Marchino
      * @date 14:17 2024/5/27
      */
-    public static List<String[]> lowAndRowRead(String filePath) {
+    public static List<String[]> colAndRowRead(String filePath) {
         List<String[]> data = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -31,7 +31,7 @@ public class DataReader {
         return data;
     }
 
-    public static List<Double> lowRead(String filePath) {
+    public static List<Double> colRead(String filePath) {
         List<Double> data = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {

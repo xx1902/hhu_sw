@@ -16,10 +16,10 @@ import java.util.List;
 public class run {
     public static void main(String[] args) {
         //加载模型参数, 第一列逐日降雨量， 第二列
-        List<String[]> paras = DataReader.lowAndRowRead("./inputData.txt");
+        List<String[]> paras = DataReader.colAndRowRead("./inputData.txt");
 
         //加载gr4j模型的状态变量和流域大小
-        List<Double> otherParas = DataReader.lowRead("./others.txt");
+        List<Double> otherParas = DataReader.colRead("./others.txt");
         double area = otherParas.get(0);//测试流域面积的大小（km2）
         double upperTankRadio = otherParas.get(1);//上层产流水库初始填充
         double lowerTankRadio = otherParas.get(2);//下层产流水库初始填充
