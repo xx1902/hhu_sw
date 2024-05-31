@@ -81,7 +81,6 @@ public class run {
             }else {
                 UH2[i] = SH2[i] - SH2[i - 1];
             }
-            System.out.println(UH2[i]);
 
         }
 
