@@ -80,9 +80,8 @@ for i in range(nStep):
         Pn[i] = 0
         En[i] = E[i] - P[i]
 
-print(SH2)
-# Q = simulate_gr4j(nStep, x1, x2, x3, x4, upperTankRatio, lowerTankRatio, maxDayDelay, UH1, UH2, Pn, En)
+# Q值的计算
+from simulate import *
 
-
-
+Q = simulate_gr4j(nStep, x1, x2, x3, x4, upperTankRatio, lowerTankRatio, maxDayDelay, UH1, UH2, Pn, En)
 
