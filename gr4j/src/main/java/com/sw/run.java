@@ -6,6 +6,7 @@ import com.sw.unit.DataReader;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.sw.simulate;
 
 /**
  * @author Marchino
@@ -21,8 +22,8 @@ public class run {
         //加载gr4j模型的状态变量和流域大小
         List<Double> otherParas = DataReader.colRead("./others.txt");
         double area = otherParas.get(0);//测试流域面积的大小（km2）
-        double upperTankRadio = otherParas.get(1);//上层产流水库初始填充
-        double lowerTankRadio = otherParas.get(2);//下层产流水库初始填充
+        double upperTankRatio = otherParas.get(1);//上层产流水库初始填充
+        double lowerTankRatio = otherParas.get(2);//下层产流水库初始填充
 
         //gr4j_Parameter参数读入
         List<Double> para = DataReader.colRead("./GR4J_Parameter.txt");
@@ -95,6 +96,7 @@ public class run {
         }
 
 
-
+        double[] result = new double[nStep];
+        result = simulate_gr4j(nStep,x1,x2,x3,x4,upperTankRatio,lowerTankRatio,maxDayDelay,UH1,UH2,Pn,En);
     }
 }
