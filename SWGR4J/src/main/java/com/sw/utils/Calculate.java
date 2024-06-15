@@ -66,5 +66,18 @@ public class Calculate {
         return Math.pow(x2 * (R / x3), 3.5);
     }
 
+    /***
+     * @description 汇流计算Qr
+     * @param: tempR
+     * @param: x3
+     * @return double
+     * @author Marchino
+     * @date 23:29 2024/6/15
+     */
+    public double calQr(double tempR, double x3){
+        return tempR * (1 - Math.pow(1 + Math.pow(tempR / x3, 4), -0.25));
+    }
+
+
 
 }
