@@ -7,4 +7,22 @@ package com.sw.utils;
  */
 
 public class Calculate {
+
+    public double[] getPnAndEn(double P,double E){
+        double Pn = 0.0;
+        double En = 0.0;
+        if(P > E){
+            Pn = P - E;
+            En = 0;
+        }
+        if(P < E){
+            Pn = 0;
+            En = E - P;
+        }
+        double[] PnAndEn = new double[2];
+        PnAndEn[0] = Pn;
+        PnAndEn[1] = En;
+        return PnAndEn;
+    }
+
 }
