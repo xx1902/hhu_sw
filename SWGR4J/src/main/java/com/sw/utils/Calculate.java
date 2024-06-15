@@ -70,13 +70,16 @@ public class Calculate {
 
     public void production_Store(double[][] PnAndEn,double S,double X1){
         //获取Pn和En
-        double Pn = PnAndEn[0][];
-        double En = PnAndEn[1][];
+        double[] Pn = null;
+        double[] En = null;
+        for (int i = 0; i < PnAndEn[0].length; i++) {
+            Pn[i] = PnAndEn[0][i];
+        }
+        for (int i = 0; i < PnAndEn[1].length; i++) {
+            En[i] = PnAndEn[1][i];
+        }
         double Ps;//产流水库增加水量
         double Es;//产流水库消耗水量
-        if(Pn != 0){//Pn≠0，净降雨将填充产流水库水量  calPs
-
-        }
     }
     
     /***
