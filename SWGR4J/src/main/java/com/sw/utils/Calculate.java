@@ -78,4 +78,53 @@ public class Calculate {
 
         }
     }
+    
+    /***
+     * @description 单位线计算UH
+     * @param: maxDayDelay
+    * @param: SH
+     * @return double[]
+     * @author Marchino
+     * @date 23:21 2024/6/15
+     */
+    public double[] calUH(int maxDayDelay, double[] SH){
+        double[] UH = new double[maxDayDelay];
+        for (int i = 0; i < maxDayDelay; i++) {
+            if (i == 0) {
+                UH[i] = SH[i];
+            } else {
+                UH[i] = SH[i] - SH[i - 1];
+            }
+        }
+        return UH;
+        
+    }
+
+    /***
+     * @description 单位线F计算
+     * @param: x2 gr4j模型参数
+    * @param: x3 gr4j模型参数
+     * @param: R 汇流水库水量
+     * @return double
+     * @author Marchino
+     * @date 23:23 2024/6/15
+     */
+    public double calF(double x2, double x3, double R){
+        return Math.pow(x2 * (R / x3), 3.5);
+    }
+
+    /***
+     * @description 汇流计算Qr
+     * @param: tempR
+     * @param: x3
+     * @return double
+     * @author Marchino
+     * @date 23:29 2024/6/15
+     */
+    public double calQr(double tempR, double x3){
+        return tempR * (1 - Math.pow(1 + Math.pow(tempR / x3, 4), -0.25));
+    }
+
+
+
 }
