@@ -79,7 +79,7 @@ public class Calculate {
      * @param S  产流水库逐日水量
      * @return
      */
-    public static double CalPs(double Pn, double En, double x1, double S) {
+    public static double calPs(double Pn, double En, double x1, double S) {
         double Ps;
         if(En == 0){
             Ps = x1 * (1 - Math.pow((S / x1),2)) * Math.tanh(Pn / x1) / (1 + S / x1 * Math.tanh(Pn / x1));
@@ -97,7 +97,7 @@ public class Calculate {
      * @param S  产流水库逐日水量
      * @return
      */
-    public static double CalEs(double Pn, double En, double x1, double S) {
+    public static double calEs(double Pn, double En, double x1, double S) {
         double Es;
         if(Pn == 0){
             Es = (S * (2 - (S / x1)) * Math.tanh(En / x1)) / (1 + (1 - S / x1) * Math.tanh(En / x1));
@@ -106,6 +106,21 @@ public class Calculate {
         }
         return Es;
     }
+
+
+    /**
+     * @param S         产流水库逐日水量
+     * @param x1        产流水库容量
+     * @param S_temp    用S_temp存储当前产流水库储量
+     * @return
+     */
+    public static double calPerc(double S, double x1, double S_temp) {
+        double Perc;
+        Perc = S_temp * (1 - Math.pow(1 + Math.pow(4.0 / 9.0 * (S_temp / x1), 4), -0.25));
+        return Perc;
+    }
+
+
     
     /***
      * @description 单位线计算UH
