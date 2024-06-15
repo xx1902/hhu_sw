@@ -13,6 +13,13 @@ import java.util.List;
 
 public class Calculate {
 
+    /**
+     *
+     * @param nStep 读取数据的长度
+     * @param P     降雨量
+     * @param E     蒸发量
+     * @return
+     */
     public double[][] getPnAndEn(int nStep,List<Double> P, List<Double> E){
 //        //加载gr4j模型的状态变量和流域大小
 //        List<Double> otherParas = DataReader.colRead("./others.txt");
