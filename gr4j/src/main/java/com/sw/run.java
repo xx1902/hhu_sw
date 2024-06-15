@@ -67,7 +67,7 @@ public class run {
 
         }
 
-        //计算UH1和UH2
+        //计算UH1和UH2 √
         for (int i = 0; i < maxDayDelay; i++) {
             if(i == 0){
                 UH1[i] = SH1[i];
