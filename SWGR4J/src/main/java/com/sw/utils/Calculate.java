@@ -20,7 +20,7 @@ public class Calculate {
      * @param E     蒸发量
      * @return
      */
-    public double[][] getPnAndEn(int nStep,List<Double> P, List<Double> E){
+    public static double[][] getPnAndEn(int nStep,List<Double> P, List<Double> E){
 //        //加载gr4j模型的状态变量和流域大小
 //        List<Double> otherParas = DataReader.colRead("./others.txt");
 //        double area = otherParas.get(0);//测试流域面积的大小（km2）
@@ -80,7 +80,7 @@ public class Calculate {
      * @param S  产流水库逐日水量
      * @return
      */
-    public double CalPs(double Pn, double En, double x1, double S) {
+    public static double CalPs(double Pn, double En, double x1, double S) {
         double Ps;
         if(En == 0){
             Ps = x1 * (1 - Math.pow((S / x1),2)) * Math.tanh(Pn / x1) / (1 + S / x1 * Math.tanh(Pn / x1));
@@ -98,7 +98,7 @@ public class Calculate {
      * @param S  产流水库逐日水量
      * @return
      */
-    public double CalEs(double Pn, double En, double x1, double S) {
+    public static double CalEs(double Pn, double En, double x1, double S) {
         double Es;
         if(Pn == 0){
             Es = (S * (2 - (S / x1)) * Math.tanh(En / x1)) / (1 + (1 - S / x1) * Math.tanh(En / x1));
@@ -116,7 +116,7 @@ public class Calculate {
      * @author Marchino
      * @date 23:21 2024/6/15
      */
-    public double[] calUH(int maxDayDelay, double[] SH){
+    public static double[] calUH(int maxDayDelay, double[] SH){
         double[] UH = new double[maxDayDelay];
         for (int i = 0; i < maxDayDelay; i++) {
             if (i == 0) {
@@ -138,7 +138,7 @@ public class Calculate {
      * @author Marchino
      * @date 23:23 2024/6/15
      */
-    public double calF(double x2, double x3, double R){
+    public static double calF(double x2, double x3, double R){
         return Math.pow(x2 * (R / x3), 3.5);
     }
 
@@ -150,7 +150,7 @@ public class Calculate {
      * @author Marchino
      * @date 23:29 2024/6/15
      */
-    public double calQr(double tempR, double x3){
+    public static double calQr(double tempR, double x3){
         return tempR * (1 - Math.pow(1 + Math.pow(tempR / x3, 4), -0.25));
     }
 
