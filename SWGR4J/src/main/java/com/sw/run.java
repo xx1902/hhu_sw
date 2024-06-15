@@ -15,7 +15,6 @@ public class run {
     public static void main(String[] args) {
 
     }
-
     static {
         //gr4j_Parameter参数读入
         List<Double> para = DataReader.colRead("./GR4J_Parameter.txt");
@@ -44,4 +43,5 @@ public class run {
         //观测数据的长度
         int DATA_LENGTH = data.size();
     }
+
 }
