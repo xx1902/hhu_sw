@@ -35,7 +35,7 @@ public class Calculate {
     /***
      * @description 单位线计算UH
      * @param: maxDayDelay
- * @param: SH
+    * @param: SH
      * @return double[]
      * @author Marchino
      * @date 23:21 2024/6/15
@@ -52,5 +52,19 @@ public class Calculate {
         return UH;
         
     }
+
+    /***
+     * @description 单位线F计算
+     * @param: x2 gr4j模型参数
+    * @param: x3 gr4j模型参数
+     * @param: R 汇流水库水量
+     * @return double
+     * @author Marchino
+     * @date 23:23 2024/6/15
+     */
+    public double calF(double x2, double x3, double R){
+        return Math.pow(x2 * (R / x3), 3.5);
+    }
+
 
 }
