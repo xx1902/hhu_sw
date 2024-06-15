@@ -64,10 +64,6 @@ public class simulate {
                 }
             }
 
-//            tempR = Math.max(0, tempR + UHFast[i, 1] + F[i]);
-//            Qr[i] =  tempR * (1 - Math.pow(1 + Math.pow(tempR / x3, 4), -0.25 ));
-//            Qd[i] = Math.max(0, UHSlow[i, 1] + F[i]);
-//            Q[i] = Qr[i] + Qd[i];
 
             tempR = Math.max(0, tempR + UHFast[i][1] + F[i]);
             Qr[i] = tempR * (1 - Math.pow(1 + Math.pow(tempR / x3, 4), -0.25));

@@ -1,4 +1,4 @@
-package com.sw.unit;
+package com.sw.utils;
 
 /**
  * @author Marchino
