@@ -147,7 +147,7 @@ public class Calculate {
      * @date 23:23 2024/6/15
      */
     public static double calF(double x2, double x3, double R){
-        return Math.pow(x2 * (R / x3), 3.5);
+        return x2 * Math.pow(R / x3, 3.5);
     }
 
     /***
@@ -160,6 +160,56 @@ public class Calculate {
      */
     public static double calQr(double tempR, double x3){
         return tempR * (1 - Math.pow(1 + Math.pow(tempR / x3, 4), -0.25));
+    }
+
+    /***
+     * @description sh1计算
+     * @param: t
+     * @param: x4
+     * @return double
+     * @author Marchino
+     * @date 0:58 2024/6/16
+     */
+    public static double[] sh1Curve(double x4, int maxDayDelay){
+        double[] SH1 = new double[maxDayDelay];
+
+        for (int i = 0; i < maxDayDelay; i++) {
+            SH1[i] = 0;
+            if (i <= 0){
+                SH1[i] = 0.0;
+            } else if (i < x4) {
+                SH1[i] = Math.pow((i / x4), 2.5);
+            }else if (i >= x4){
+                SH1[i] = 1.0;
+            }
+        }
+
+        return SH1;
+    }
+
+    /***
+     * @description sh2计算
+     * @param: t
+     * @param: x4
+     * @return double
+     * @author Marchino
+     * @date 0:59 2024/6/16
+     */
+    public static double[] sh2Curve(double x4, int maxDayDelay){
+        double[] SH2 = new double[maxDayDelay];
+        for (int i = 0; i < maxDayDelay; i++) {
+            if (i <= 0.0){
+                SH2[i] = 0.0;
+            }else if (i <= x4){
+                SH2[i] = 0.5 * Math.pow(i / x4, 2.5 );
+            }else if (i < 2 * x4){
+                SH2[i] = 1 - 0.5 * Math.pow((2 - i / x4), 2.5);
+            }else if (i >= 2 * x4){
+                SH2[i] = 1.0;
+            }
+        }
+
+        return SH2;
     }
 
 }

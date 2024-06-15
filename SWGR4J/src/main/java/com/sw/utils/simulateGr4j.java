@@ -10,7 +10,7 @@ public class simulateGr4j {
     public simulateGr4j(){
 
     }
-    public static double[] Gr4jSimulate(int dataLength, double x1, double x2, double x3, double x4,
+    public static double[] simulate(int dataLength, double x1, double x2, double x3, double x4,
                                         double upperTankRatio, double lowerTankRatio, int maxDayDelay,
                                         double[] UH1, double[] UH2, double[] Pn, double[] En){
         double S0 = upperTankRatio * x1; //产流水库初始土壤含水量=比例*产流水库容量
