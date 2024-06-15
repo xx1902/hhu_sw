@@ -89,7 +89,6 @@ public class Calculate {
         return Ps;
     }
 
-
     /**
      * @param Pn 净降雨量
      * @param En 净蒸发量
@@ -107,21 +106,17 @@ public class Calculate {
         return Es;
     }
 
-
     /**
-     * @param S         产流水库逐日水量
      * @param x1        产流水库容量
      * @param S_temp    用S_temp存储当前产流水库储量
      * @return
      */
-    public static double calPerc(double S, double x1, double S_temp) {
+    public static double calPerc(double x1, double S_temp) {
         double Perc;
         Perc = S_temp * (1 - Math.pow(1 + Math.pow(4.0 / 9.0 * (S_temp / x1), 4), -0.25));
         return Perc;
     }
 
-
-    
     /***
      * @description 单位线计算UH
      * @param: maxDayDelay
@@ -140,7 +135,6 @@ public class Calculate {
             }
         }
         return UH;
-        
     }
 
     /***
@@ -167,6 +161,5 @@ public class Calculate {
     public static double calQr(double tempR, double x3){
         return tempR * (1 - Math.pow(1 + Math.pow(tempR / x3, 4), -0.25));
     }
-
 
 }
