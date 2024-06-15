@@ -9,13 +9,13 @@ package com.sw.utils;
 public class Calculate {
 
     public double[] getPnAndEn(double P,double E){
-        double Pn = 0.0;
-        double En = 0.0;
-        if(P > E){
+        double Pn = 0.0;//净降雨量
+        double En = 0.0;//净蒸发量
+        if(P >= E){//当日降雨量大于等于当日蒸发量
             Pn = P - E;
             En = 0;
         }
-        if(P < E){
+        if(P < E){//当日降雨量小于当日蒸发量
             Pn = 0;
             En = E - P;
         }
@@ -25,4 +25,10 @@ public class Calculate {
         return PnAndEn;
     }
 
+
+    public void production_Store(double Pn,double En){//根据En，Pn分析产流水库水量S变化
+        if(Pn != 0){//Pn≠0，净降雨将填充产流水库水量  calPs
+
+        }
+    }
 }
