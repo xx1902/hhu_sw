@@ -31,4 +31,26 @@ public class Calculate {
 
         }
     }
+    
+    /***
+     * @description 单位线计算UH
+     * @param: maxDayDelay
+ * @param: SH
+     * @return double[]
+     * @author Marchino
+     * @date 23:21 2024/6/15
+     */
+    public double[] calUH(int maxDayDelay, double[] SH){
+        double[] UH = new double[maxDayDelay];
+        for (int i = 0; i < maxDayDelay; i++) {
+            if (i == 0) {
+                UH[i] = SH[i];
+            } else {
+                UH[i] = SH[i] - SH[i - 1];
+            }
+        }
+        return UH;
+        
+    }
+
 }
