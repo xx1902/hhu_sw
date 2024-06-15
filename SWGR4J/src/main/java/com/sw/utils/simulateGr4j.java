@@ -26,6 +26,9 @@ public class simulateGr4j {
         double[] F = new double[dataLength];
         double[][] UHFast = new double[dataLength][maxDayDelay];
         double[][] UHSlow = new double[dataLength][maxDayDelay * 2];
+        double[] Qr = new double[dataLength];
+        double[] Qd = new double[dataLength];
+        double[] Q = new double[dataLength];
 
         for (int i = 0; i < dataLength; i++) {
             S[i] = tempS;
@@ -66,11 +69,24 @@ public class simulateGr4j {
                 }
             }
 
+            //更新汇流水库水量变化
+            tempR = Math.max(0, tempR + UHFast[i][1] + F[i]);
+
+            //计算汇流水库快速流出流量
+            Qr[i] = Calculate.calQr(tempR, x3);
+
+            //再次更新汇流水库水量变化
+            tempR = tempR - Qr[i];
+
+            //计算汇流水库慢速流出流量
+            Qd[i] = Math.max(0, UHSlow[i][1] + F[i]);
+
+            Q[i] = Qr[i] + Qd[i];
 
 
 
 
         }
-        return null;
+        return Q;
     }
 }
