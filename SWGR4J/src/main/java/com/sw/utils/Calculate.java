@@ -154,12 +154,5 @@ public class Calculate {
         return tempR * (1 - Math.pow(1 + Math.pow(tempR / x3, 4), -0.25));
     }
 
-    public double calPs(){
-        if(en = 0){
-            return 0
-        }
-    }
-
-
 
 }
