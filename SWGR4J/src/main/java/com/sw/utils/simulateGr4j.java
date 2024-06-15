@@ -31,13 +31,18 @@ public class simulateGr4j {
             S[i] = tempS;
             R[i] = tempR;
             //TODO 计算PS， ES
+            Ps[i] = Calculate.calPs(Pn[i], En[i], x1, S[i]);
+            Es[i] = Calculate.calEs(Pn[i], En[i], x1, S[i]);
+
 
             //更新上层水库蓄水量
             tempS = S[i] - Es[i] + Ps[i];
 
             //TODO 计算产流水库渗透perc
+            perc[i] = Calculate.calPerc(x1,tempS);
 
             //TODO 计算产流总量pr
+            pr[i] = perc[i] + (Pn[i] - Ps[i]);
 
             //更新当前产流水库水量，作为次日产流水库水量
             tempS = tempS - perc[i];
