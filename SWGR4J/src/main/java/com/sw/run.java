@@ -55,7 +55,6 @@ public class run {
         int maxDayDelay = 10;//根据参数x4计算S曲线和单位线 ，假设但危险长度UH1为10天， UH2为20天
 
 
-
         double[] Pn = new double[DATA_LENGTH];//存储有效降雨量
         double[] En = new double[DATA_LENGTH];//存储剩余的蒸发能力
 
@@ -70,12 +69,29 @@ public class run {
         }
 
 
-
-
-        for (double x1 = 20; x1 <= 700; x1 += 10) {
+        for (double x1 = 150; x1 <= 700; x1 += 10) {
             for (double x2 = -5.5; x2 <= 3.5; x2 += 0.1) {
                 for (double x3 = 20; x3 <= 400; x3 += 10) {
-                    for (double x4 = 1.0; x4 < 2.5; x4 += 0.1) {
+                    double NSE = 0;
+                    for (double i = 1.0; i <= 2.5; i += 0.4) {
+                        //计算SH1和SH2
+                        double[] SH1 = Calculate.sh1Curve(i, maxDayDelay);
+                        double[] SH2 = Calculate.sh2Curve(i, maxDayDelay * 2);
+
+                        double[] UH1 = Calculate.calUH(maxDayDelay, SH1);
+                        double[] UH2 = Calculate.calUH(maxDayDelay * 2, SH2);
+                        double[] Q = simulate(DATA_LENGTH, x1, x2, x3, X4, UPPER_TANK_RADIO, LOWER_TANK_RADIO, maxDayDelay, UH1, UH2, Pn, En);
+                        NSE = evaluateGR4JModel(DATA_LENGTH, Q, QOBS);
+                        if (NSE > 0.8) {
+                            break;
+                        }
+                    }
+                    if (NSE <= 0.8) {
+                        break;
+                    }
+
+
+                    for (double x4 = 1.0; x4 <= 2.5; x4 += 0.1) {
 
                         //计算SH1和SH2
                         double[] SH1 = Calculate.sh1Curve(x4, maxDayDelay);
@@ -84,19 +100,20 @@ public class run {
                         double[] UH1 = Calculate.calUH(maxDayDelay, SH1);
                         double[] UH2 = Calculate.calUH(maxDayDelay * 2, SH2);
                         double[] Q = simulate(DATA_LENGTH, x1, x2, x3, X4, UPPER_TANK_RADIO, LOWER_TANK_RADIO, maxDayDelay, UH1, UH2, Pn, En);
-                        double NSE = evaluateGR4JModel(DATA_LENGTH, Q, QOBS);
+                        NSE = evaluateGR4JModel(DATA_LENGTH, Q, QOBS);
+                        if (NSE > 0.83) {
+                            {
+                                System.out.println("X1: " + x1 + " X2: " + x2 + " X3: " + x3 + "  x4: " + x4 + " NSE: " + NSE);
+                            }
 
-
-                        if (NSE > 0.75){
-                            System.out.println("X1: " + x1 + " X2: " + x2 + " X3: " + x3 + "x4: " + x4 + " NSE: " + NSE);
-                    }
+                        }
                     }
                 }
             }
+
+
         }
 
-
     }
-
 
 }
