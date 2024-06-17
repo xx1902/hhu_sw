@@ -3,9 +3,18 @@ package com.sw;
 import com.sw.utils.Calculate;
 import com.sw.utils.DataReader;
 import com.sw.utils.simulateGr4j;
+import org.apache.commons.math3.analysis.MultivariateFunction;
+import org.apache.commons.math3.optim.nonlinear.scalar.ObjectiveFunction;
+import org.apache.commons.math3.optim.nonlinear.scalar.ObjectiveFunctionGradient;
+import org.apache.commons.math3.optim.nonlinear.scalar.noderiv.CMAESOptimizer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
+
+import static com.sw.utils.simulateGr4j.evaluateGR4JModel;
+import static com.sw.utils.simulateGr4j.simulate;
 
 /**
  * @author Marchino
@@ -32,26 +41,20 @@ public class run {
         List<String[]> data = DataReader.colAndRowRead("./inputData.txt");
         List<Double> P = new ArrayList<>();//降雨
         List<Double> E = new ArrayList<>();//蒸散发
-        List<Double> QOBS = new ArrayList<>();//径流观测值
-        for (String[] datum : data) {
-            P.add(Double.parseDouble(datum[0]));
-            E.add(Double.parseDouble(datum[1]));
-            QOBS.add(Double.parseDouble(datum[2]) * 86.4 / AREA);
-        }
-
-
-
         //观测数据的长度
         int DATA_LENGTH = data.size();
 
+        double[] QOBS = new double[DATA_LENGTH];
+        int k = 0;
+        for (String[] datum : data) {
+            P.add(Double.parseDouble(datum[0]));
+            E.add(Double.parseDouble(datum[1]));
+            QOBS[k++] = Double.parseDouble(datum[2]) * 86.4 / AREA;
+        }
+
         int maxDayDelay = 10;//根据参数x4计算S曲线和单位线 ，假设但危险长度UH1为10天， UH2为20天
 
-        //计算SH1和SH2
-        double[] SH1 = Calculate.sh1Curve(X4, maxDayDelay);
-        double[] SH2= Calculate.sh2Curve(X4, maxDayDelay * 2);
 
-        double[] UH1 = Calculate.calUH(maxDayDelay, SH1);
-        double[] UH2 = Calculate.calUH(maxDayDelay * 2, SH2);
 
         double[] Pn = new double[DATA_LENGTH];//存储有效降雨量
         double[] En = new double[DATA_LENGTH];//存储剩余的蒸发能力
@@ -65,10 +68,34 @@ public class run {
                 En[i] = E.get(i) - P.get(i);
             }
         }
-        double[] simulate = simulateGr4j.simulate(DATA_LENGTH, X1, X2, X3, X4, UPPER_TANK_RADIO, LOWER_TANK_RADIO, 10, UH1, UH2, Pn, En);
-        for (double v : simulate) {
-            System.out.println(v);
+
+
+
+
+        for (double x1 = 20; x1 <= 700; x1 += 10) {
+            for (double x2 = -5.5; x2 <= 3.5; x2 += 0.1) {
+                for (double x3 = 20; x3 <= 400; x3 += 10) {
+                    for (double x4 = 1.0; x4 < 2.5; x4 += 0.1) {
+
+                        //计算SH1和SH2
+                        double[] SH1 = Calculate.sh1Curve(x4, maxDayDelay);
+                        double[] SH2 = Calculate.sh2Curve(x4, maxDayDelay * 2);
+
+                        double[] UH1 = Calculate.calUH(maxDayDelay, SH1);
+                        double[] UH2 = Calculate.calUH(maxDayDelay * 2, SH2);
+                        double[] Q = simulate(DATA_LENGTH, x1, x2, x3, X4, UPPER_TANK_RADIO, LOWER_TANK_RADIO, maxDayDelay, UH1, UH2, Pn, En);
+                        double NSE = evaluateGR4JModel(DATA_LENGTH, Q, QOBS);
+
+
+                        if (NSE > 0.75){
+                            System.out.println("X1: " + x1 + " X2: " + x2 + " X3: " + x3 + "x4: " + x4 + " NSE: " + NSE);
+                    }
+                    }
+                }
+            }
         }
+
+
     }
 
 
