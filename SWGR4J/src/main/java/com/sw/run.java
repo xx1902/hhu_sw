@@ -69,29 +69,12 @@ public class run {
         }
 
 
-        for (double x1 = 150; x1 <= 700; x1 += 10) {
-            for (double x2 = -5.5; x2 <= 3.5; x2 += 0.1) {
-                for (double x3 = 20; x3 <= 400; x3 += 10) {
+        for (double x1 = 270; x1 <= 300; x1 += 0.5) {
+            for (double x2 = 1.6; x2 <= 1.9; x2 += 0.05) {
+                for (double x3 = 30; x3 <=35; x3 += 0.5) {
                     double NSE = 0;
-                    for (double i = 1.0; i <= 2.5; i += 0.4) {
-                        //计算SH1和SH2
-                        double[] SH1 = Calculate.sh1Curve(i, maxDayDelay);
-                        double[] SH2 = Calculate.sh2Curve(i, maxDayDelay * 2);
 
-                        double[] UH1 = Calculate.calUH(maxDayDelay, SH1);
-                        double[] UH2 = Calculate.calUH(maxDayDelay * 2, SH2);
-                        double[] Q = simulate(DATA_LENGTH, x1, x2, x3, X4, UPPER_TANK_RADIO, LOWER_TANK_RADIO, maxDayDelay, UH1, UH2, Pn, En);
-                        NSE = evaluateGR4JModel(DATA_LENGTH, Q, QOBS);
-                        if (NSE > 0.8) {
-                            break;
-                        }
-                    }
-                    if (NSE <= 0.8) {
-                        break;
-                    }
-
-
-                    for (double x4 = 1.0; x4 <= 2.5; x4 += 0.1) {
+                    for (double x4 = 2.23; x4 <= 2.61; x4 += 0.01) {
 
                         //计算SH1和SH2
                         double[] SH1 = Calculate.sh1Curve(x4, maxDayDelay);
@@ -99,21 +82,21 @@ public class run {
 
                         double[] UH1 = Calculate.calUH(maxDayDelay, SH1);
                         double[] UH2 = Calculate.calUH(maxDayDelay * 2, SH2);
-                        double[] Q = simulate(DATA_LENGTH, x1, x2, x3, X4, UPPER_TANK_RADIO, LOWER_TANK_RADIO, maxDayDelay, UH1, UH2, Pn, En);
-                        NSE = evaluateGR4JModel(DATA_LENGTH, Q, QOBS);
-                        if (NSE > 0.83) {
-                            {
-                                System.out.println("X1: " + x1 + " X2: " + x2 + " X3: " + x3 + "  x4: " + x4 + " NSE: " + NSE);
-                            }
+                        double[] Q = simulate(DATA_LENGTH, x1, x2, x3, x4, UPPER_TANK_RADIO, LOWER_TANK_RADIO, maxDayDelay, UH1, UH2, Pn, En);
+                        NSE = simulateGr4j.evaluateGR4JModel2(DATA_LENGTH, QOBS, Q);
 
+                        if (NSE > 0.835) {
+                            System.out.println("X1: " + x1 + " X2: " + x2 + " X3: " + x3 + "  x4: " + x4 + " NSE: " + NSE);
                         }
+
+
                     }
                 }
             }
 
-
         }
-
     }
 
 }
+
+
