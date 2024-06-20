@@ -14,38 +14,32 @@ import java.util.List;
 
 public class run {
     public static void main(String[] args) {
-        //gr4j_Parameter参数读入
-//        List<Double> para = DataReader.colRead("./106006GR4J_Parameter.txt");
-//        double X1 = para.get(0);//产流水库容量
-//        double X2 = para.get(1);//地下水交换系数
-//        double X3 = para.get(2);//流域水库容量
-//        double X4 = para.get(3);//单位线回流时间
 
-//
-//        Result result1 = getResult("./data/demo_124002A/");
-//        extracted(result1.maxDayDelay, result1.DATA_LENGTH, result1.UPPER_TANK_RADIO, result1.LOWER_TANK_RADIO, result1.Pn, result1.En, result1.QOBS, "output124002A.xlsx");
-//
-//        Result result2 = getResult("./data/demo_136006A/");
-//        extracted(result2.maxDayDelay, result2.DATA_LENGTH, result2.UPPER_TANK_RADIO, result2.LOWER_TANK_RADIO, result2.Pn, result2.En, result2.QOBS, "output136006A.xlsx");
-//
-//        Result result3 = getResult("./data/demo_146010A/");
-//        extracted(result3.maxDayDelay, result3.DATA_LENGTH, result3.UPPER_TANK_RADIO, result3.LOWER_TANK_RADIO, result3.Pn, result3.En, result3.QOBS, "output146010A.xlsx");
+        Result result1 = getResult("./data/demo_124002A/");
+        extracted(result1.maxDayDelay, result1.DATA_LENGTH, result1.UPPER_TANK_RADIO, result1.LOWER_TANK_RADIO,
+                result1.Pn, result1.En, result1.QOBS, "output124002A.xlsx");
 
-//        Result result4 = getResult("./data/demo_234203/");
-//        extracted(result4.maxDayDelay, result4.DATA_LENGTH, result4.UPPER_TANK_RADIO, result4.LOWER_TANK_RADIO, result4.Pn, result4.En, result4.QOBS, "output234203A.xlsx");
+        Result result2 = getResult("./data/demo_136006A/");
+        extracted(result2.maxDayDelay, result2.DATA_LENGTH, result2.UPPER_TANK_RADIO, result2.LOWER_TANK_RADIO, result2.Pn, result2.En, result2.QOBS, "output136006A.xlsx");
+
+        Result result3 = getResult("./data/demo_146010A/");
+        extracted(result3.maxDayDelay, result3.DATA_LENGTH, result3.UPPER_TANK_RADIO, result3.LOWER_TANK_RADIO, result3.Pn, result3.En, result3.QOBS, "output146010A.xlsx");
+
+        Result result4 = getResult("./data/demo_234203/");
+        extracted(result4.maxDayDelay, result4.DATA_LENGTH, result4.UPPER_TANK_RADIO, result4.LOWER_TANK_RADIO, result4.Pn, result4.En, result4.QOBS, "output234203A.xlsx");
 
         Result result5 = getResult("./data/demo_312061/");//X
         extracted(result5.maxDayDelay, result5.DATA_LENGTH, result5.UPPER_TANK_RADIO, result5.LOWER_TANK_RADIO, result5.Pn, result5.En, result5.QOBS, "output312061.xlsx");
 
-//        Result result6 = getResult("./data/demo_314214/");
-//        extracted(result6.maxDayDelay, result6.DATA_LENGTH, result6.UPPER_TANK_RADIO, result6.LOWER_TANK_RADIO, result6.Pn, result6.En, result6.QOBS, "output314214.xlsx");
+        Result result6 = getResult("./data/demo_314214/");
+        extracted(result6.maxDayDelay, result6.DATA_LENGTH, result6.UPPER_TANK_RADIO, result6.LOWER_TANK_RADIO, result6.Pn, result6.En, result6.QOBS, "output314214.xlsx");
 
-//        Result result7 = getResult("./data/demo_401017/");
-//        extracted(result7.maxDayDelay, result7.DATA_LENGTH, result7.UPPER_TANK_RADIO, result7.LOWER_TANK_RADIO, result7.Pn, result7.En, result7.QOBS, "output401017.xlsx");
+        Result result7 = getResult("./data/demo_401017/");
+        extracted(result7.maxDayDelay, result7.DATA_LENGTH, result7.UPPER_TANK_RADIO, result7.LOWER_TANK_RADIO, result7.Pn, result7.En, result7.QOBS, "output401017.xlsx");
 
         Result result8 = getResult("./data/demo_401217/");//X
         extracted(result8.maxDayDelay, result8.DATA_LENGTH, result8.UPPER_TANK_RADIO, result8.LOWER_TANK_RADIO, result8.Pn, result8.En, result8.QOBS, "output401217.xlsx");
-
+//
         Result result9 = getResult("./data/demo_405263/");//X
         extracted(result9.maxDayDelay, result9.DATA_LENGTH, result9.UPPER_TANK_RADIO, result9.LOWER_TANK_RADIO, result9.Pn, result9.En, result9.QOBS, "output405263.xlsx");
 
@@ -122,12 +116,13 @@ public class run {
     private static void extracted(int maxDayDelay, int DATA_LENGTH, double UPPER_TANK_RADIO, double LOWER_TANK_RADIO, double[] Pn, double[] En, double[] QOBS, String filePath) {
         WriteExcel writeExcel = new WriteExcel();
         List<DataRow> dataRows = new ArrayList<>();
-        for (double x1 = 10; x1 <= 700; x1 += 6.9) {
-            for (double x2 = -5.5; x2 <= 3.5; x2 += 0.5) {
-                for (double x3 = 20; x3 <=400; x3 += 3.8) {
+        for (double x1 = 10; x1 <= 700.1; x1 += 10) {
+            System.out.println(filePath + "   x1 = " + x1);
+            for (double x2 = -5.5; x2 <= 3.51; x2 += 1) {
+                for (double x3 = 20; x3 <=400.1; x3 += 10) {
                     double NSE = 0;
 
-                    for (double x4 = 1.0; x4 <= 2.5; x4 += 0.4) {
+                    for (double x4 = 1.0; x4 <= 2.51; x4 += 0.4) {
 
                         //计算SH1和SH2
                         double[] SH1 = Calculate.sh1Curve(x4, maxDayDelay);
@@ -138,15 +133,15 @@ public class run {
                         double[] Q = simulateGr4j.simulate(DATA_LENGTH, x1, x2, x3, x4, UPPER_TANK_RADIO, LOWER_TANK_RADIO, maxDayDelay, UH1, UH2, Pn, En);
                         NSE = simulateGr4j.evaluateGR4JModel2(DATA_LENGTH, QOBS, Q);
 
-                        if (NSE > 0.78) {
+                        if (NSE > 0.79) {
                             break;
                         }
                     }
-                    if (NSE <= 0.78) {
-                        break;
+                    if (NSE <= 0.79) {
+                        continue;
                     }
 
-                    for (double x4 = 1.0; x4 <= 2.5 ; x4 += 0.1) {
+                    for (double x4 = 2.0; x4 <= 2.51 ; x4 += 0.1) {
                         //计算SH1和SH2
                         double[] SH1 = Calculate.sh1Curve(x4, maxDayDelay);
                         double[] SH2 = Calculate.sh2Curve(x4, maxDayDelay * 2);
@@ -155,14 +150,14 @@ public class run {
                         double[] UH2 = Calculate.calUH(maxDayDelay * 2, SH2);
                         double[] Q = simulateGr4j.simulate(DATA_LENGTH, x1, x2, x3, x4, UPPER_TANK_RADIO, LOWER_TANK_RADIO, maxDayDelay, UH1, UH2, Pn, En);
                         NSE = simulateGr4j.evaluateGR4JModel2(DATA_LENGTH, QOBS, Q);
-                        if (NSE > 0.81){
+                        if (NSE > 0.8){
                             dataRows.add(new DataRow(x1, x2, x3, x4, NSE));
                         }
                     }
 
                 }
             }
-            System.out.println(filePath + "   x1 = " + x1);
+
 
         }
         writeExcel.writeExcel(dataRows, filePath);
