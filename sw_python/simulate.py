@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 
-def simulate_gr4j(nStep, x1, x2,x3,x4, upperTankRatio, lowerTankRatio, maxDayDelay, UH1, UH2, Pn, En):
+def simulate_gr4j(nStep, x1, x2, x3, x4, upperTankRatio, lowerTankRatio, maxDayDelay, UH1, UH2, Pn, En):
     # 定义一些产汇流计算需要用到的数值及数组
     S0 = upperTankRatio * x1            # 定义产流水库初识土壤含水量 = 初识土壤含水比例 * 产流水库容量
     R0 = lowerTankRatio * x3            # 定义汇流水库初始土壤含水量 = 初识土壤含水比例 * 汇流水库容量
