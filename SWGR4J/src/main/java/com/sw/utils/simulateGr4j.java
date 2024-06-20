@@ -1,5 +1,9 @@
 package com.sw.utils;
 
+import org.apache.commons.math3.optim.SimpleBounds;
+import org.apache.commons.math3.optim.SimpleValueChecker;
+import org.apache.commons.math3.optim.nonlinear.scalar.noderiv.CMAESOptimizer;
+
 /**
  * @author Marchino
  * @date 2024/6/15 23:37
@@ -7,6 +11,8 @@ package com.sw.utils;
  */
 
 public class simulateGr4j {
+    static final double[] LOWER_BOUNDS = {10.0, -5.5, 20.0, 1.0}; // 参数下界
+    static final double[] UPPER_BOUNDS = {700.0, 3.5, 400.0, 2.5}; // 参数上界
     public simulateGr4j(){
 
     }
@@ -87,9 +93,69 @@ public class simulateGr4j {
             Q[i] = Qr[i] + Qd[i];
 
 
-
-
         }
         return Q;
     }
+
+    /***
+     * @description
+     * @param: nStep
+     * @param: Qobs_mm  实测径流
+     * @param: Q 模拟径流
+     * @param: plot
+     * @return double
+     * @author Marchino
+     * @date 14:03 2024/6/17
+     */
+    public static double evaluateGR4JModel(int nStep, double[] Q, double[] Qobs_mm) {
+        // 精度评估
+        int count = 0;  // 计数器：记录总天数
+        double Q_accum = 0.0;  // 记录累计径流量
+        double Q_ave = 0.0;  // 记录平均径流量
+        double NSE = 0.0;  // 记录纳什效率系数
+        double Q_diff1 = 0.0;
+        double Q_diff2 = 0.0;
+
+        for (int i = 365; i < nStep; i++) {
+            count++;
+            Q_accum += Qobs_mm[i];
+        }
+
+        Q_ave = Q_accum / count;  // 计算观测流量平均值
+
+        for (int i = 365; i < nStep; i++) {
+            Q_diff1 += Math.pow(Q[i] - Qobs_mm[i], 2);  // 计算Nash-Sutcliffe指数分子
+            Q_diff2 += Math.pow(Q[i] - Q_ave, 2);  // 计算Nash-Sutcliffe指数分母
+        }
+
+        NSE = 1 - Q_diff1 / Q_diff2;
+
+        return NSE;
+    }
+
+    public static double evaluateGR4JModel2(int nStep, double[] Qobs_mm, double[] Q) {
+        int count = 0;
+        double Q_accum = 0.0;
+        double Q_ave = 0.0;
+        double NSE = 0.0;
+        double Q_diff1 = 0.0;
+        double Q_diff2 = 0.0;
+
+        for (int i = 365; i < nStep; i++) {
+            count++;
+            Q_accum += Qobs_mm[i];
+        }
+
+        Q_ave = Q_accum / count;
+
+        for (int i = 365; i < nStep; i++) {
+            Q_diff1 += Math.pow(Qobs_mm[i] - Q[i], 2);
+            Q_diff2 += Math.pow(Qobs_mm[i] - Q_ave, 2);
+        }
+
+        NSE = 1 - Q_diff1 / Q_diff2;
+
+        return NSE;
+    }
+
 }
