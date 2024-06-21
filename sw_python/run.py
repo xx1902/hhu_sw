@@ -17,7 +17,7 @@ from scipy.optimize import differential_evolution  # 差分进化优化函数
 from pyswarm import pso  # 导入粒子群优化函数
 
 # str = 'data'
-str = 'demo_136006A'
+str = 'demo_405263'
 # 加载GR4J模型参数
 para = np.loadtxt(str + '/GR4J_Parameter.txt')
 x1 = para[0]  # x1: 产流水库容量 (mm)
@@ -108,18 +108,19 @@ def objective_function(params):
 
 # 设定参数边界
 bounds = [(10, 700), (-5.5, 3.5), (20, 400), (1.0, 2.5)]
+# bounds = [(190, 210), (1, 3), (10, 110), (1.8, 2.4)]
 
 # 使用差分进化算法优化参数
-result = differential_evolution(objective_function, bounds, maxiter=100)
+result = differential_evolution(objective_function, bounds, strategy='rand2bin', popsize=10, maxiter=00, mutation=(0.6, 1.0), recombination=0.95, seed=42)
 best_params = result.x
 
-print("优化后的参数:", best_params)
+print("差分进化优化后的参数:", best_params)
 
 # 用优化后的参数运行GR4J模型
 Q_optimized = simulate_gr4j(nStep, best_params[0], best_params[1], best_params[2], best_params[3], upperTankRatio, lowerTankRatio, maxDayDelay, UH1, UH2, Pn, En)
 NSE_optimized = evaluate_gr4j_model(nStep, Qobs_mm, Q_optimized, plot=True)
 
-print("优化后的NSE:", NSE_optimized)
+print("差分进化优化后的NSE:", NSE_optimized)
 
 # 保存优化后的参数到文件
 np.savetxt(str + '/GR4J_Parameter_Optimized.txt', best_params)
@@ -144,13 +145,13 @@ ub = [bound[1] for bound in bounds]
 # 使用粒子群算法优化参数
 best_params, best_NSE = pso(objective_function, lb, ub, maxiter=100)
 
-print("优化后的参数:", best_params)
+print("粒子群算法优化后的参数:", best_params)
 
 # 用优化后的参数运行GR4J模型
 Q_optimized = simulate_gr4j(nStep, best_params[0], best_params[1], best_params[2], best_params[3], upperTankRatio, lowerTankRatio, maxDayDelay, UH1, UH2, Pn, En)
 NSE_optimized = evaluate_gr4j_model(nStep, Qobs_mm, Q_optimized, plot=True)
 
-print("优化后的NSE:", NSE_optimized)
+print("粒子群算法优化后的NSE:", NSE_optimized)
 
 # 保存优化后的参数到文件
 np.savetxt(str + '/GR4J_Parameter_Optimized2.txt', best_params)
