@@ -40,6 +40,7 @@ def evaluate_gr4j_model(nStep, Qobs_mm, Q, plot=True):
         plt.legend()
         plt.show()
 
+    NSE_3 = round(NSE, 3)
     return NSE
 
 
